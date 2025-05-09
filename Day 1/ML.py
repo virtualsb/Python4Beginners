@@ -58,3 +58,15 @@ predictions = model.predict(X_test)
 # 7. Evaluate the model
 print("Accuracy:", accuracy_score(y_test, predictions))
 print("Classification Report:\n", classification_report(y_test, predictions, zero_division=0))
+
+# 8. Make a prediction based on user input
+try:
+    age_input = int(input("Enter age: "))
+    gender_input = int(input("Enter gender (0 for female, 1 for male): "))
+
+    input_df = pd.DataFrame([[age_input, gender_input]], columns=X.columns)
+
+    predicted_genre = model.predict(input_df)[0]
+    print(f"Predicted genre for a {age_input}-year-old (gender={gender_input}): {predicted_genre}")
+except ValueError:
+    print("Invalid input. Please enter numeric values for age and gender.")
